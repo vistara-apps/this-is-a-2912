@@ -4,6 +4,7 @@ import { AppShell } from '../components/ui/AppShell'
 import { Card } from '../components/ui/Card'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
+import { SubscriptionManager } from '../components/SubscriptionManager'
 import { generateFastingPlan } from '../config/openai'
 import { 
   User, 
@@ -276,75 +277,7 @@ export const Settings = () => {
         )}
 
         {activeTab === 'subscription' && (
-          <Card variant="elevated" className="space-y-6">
-            <h2 className="text-xl font-bold text-white flex items-center">
-              <Crown className="h-5 w-5 mr-2" />
-              Subscription
-            </h2>
-
-            <div className="space-y-6">
-              <div className="p-6 rounded-lg bg-white/5 border border-white/10">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <h3 className="font-semibold text-white">Current Plan</h3>
-                    <p className="text-white/60 text-sm">
-                      {userProfile?.subscriptionStatus === 'pro' ? 'Pro Plan' : 'Free Plan'}
-                    </p>
-                  </div>
-                  <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    userProfile?.subscriptionStatus === 'pro' 
-                      ? 'bg-secondary/20 text-secondary' 
-                      : 'bg-white/10 text-white/70'
-                  }`}>
-                    {userProfile?.subscriptionStatus === 'pro' ? 'Pro' : 'Free'}
-                  </div>
-                </div>
-
-                {userProfile?.subscriptionStatus === 'free' && (
-                  <div className="space-y-4">
-                    <div className="text-white/80 text-sm">
-                      Upgrade to Pro to unlock:
-                    </div>
-                    <ul className="space-y-2 text-sm text-white/70">
-                      <li className="flex items-center">
-                        <span className="text-secondary mr-2">✓</span>
-                        Advanced AI coaching and adaptive plans
-                      </li>
-                      <li className="flex items-center">
-                        <span className="text-secondary mr-2">✓</span>
-                        Voice journaling with mood analysis
-                      </li>
-                      <li className="flex items-center">
-                        <span className="text-secondary mr-2">✓</span>
-                        Detailed progress analytics
-                      </li>
-                      <li className="flex items-center">
-                        <span className="text-secondary mr-2">✓</span>
-                        Priority support
-                      </li>
-                    </ul>
-                    
-                    <Button size="lg" className="w-full">
-                      <Crown className="h-4 w-4 mr-2" />
-                      Upgrade to Pro - $5/month
-                    </Button>
-                  </div>
-                )}
-
-                {userProfile?.subscriptionStatus === 'pro' && (
-                  <div className="space-y-4">
-                    <div className="text-white/80 text-sm">
-                      You have access to all Pro features including AI coaching, voice journaling, and advanced analytics.
-                    </div>
-                    
-                    <Button variant="outline" size="lg" className="w-full">
-                      Manage Subscription
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </Card>
+          <SubscriptionManager />
         )}
 
         {activeTab === 'notifications' && (

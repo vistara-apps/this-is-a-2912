@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import { AppProvider } from './contexts/AppContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { ToastContainer } from './components/ui/ToastContainer'
+import { useToast } from './hooks/useToast'
 import { Landing } from './pages/Landing'
 import { Auth } from './pages/Auth'
 import { Onboarding } from './pages/Onboarding'
@@ -13,6 +15,8 @@ import { Journal } from './pages/Journal'
 import { Settings } from './pages/Settings'
 
 function App() {
+  const { toasts, removeToast } = useToast()
+
   return (
     <AuthProvider>
       <AppProvider>
@@ -51,6 +55,9 @@ function App() {
               </ProtectedRoute>
             } />
           </Routes>
+          
+          {/* Toast Notifications */}
+          <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
         </div>
       </AppProvider>
     </AuthProvider>
